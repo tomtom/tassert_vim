@@ -1,1 +1,1 @@
-TPluginBefore tassert_vim[\/].+?\.vim$ @tlog_vim
+TPluginBefore \<tassert_vim[\/]autoload[\/] TPlugin tassert_vim

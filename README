@@ -78,9 +78,6 @@ Alternatively, use the |:TAssertComment| command.
 
 
 Status:  Works for me (there may be some minor quirks)
-Dependencies:
-  tlog :: http://github.com/tomtom/tlog_vim
-      > git clone git://github.com/tomtom/tlog_vim.git
 Install: See http://github.com/tomtom/vimtlib/blob/master/INSTALL.TXT
 See http://github.com/tomtom for related plugins.
 
