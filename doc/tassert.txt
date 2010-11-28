@@ -1,6 +1,5 @@
-*tAssert.txt*           Simple Assertions & Logging
+*tassert.txt*           Simple Assertions & Logging
                         Thomas Link (micathom AT gmail com?subject=vim)
-
 
 This plugin defines a command |:TAssert| that takes an expression as 
 argument and throws an exception if this expression evaluates to 

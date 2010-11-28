@@ -1,6 +1,3 @@
-*tAssert.txt*           Simple Assertions & Logging
-
-
 This plugin defines a command |:TAssert| that takes an expression as 
 argument and throws an exception if this expression evaluates to 
 |empty()|. You can insert these comments throughout your code whenever 
@@ -50,7 +47,7 @@ Install:~
 
 Edit the vba file and type: >
 
-    :so %%
+    :so %
 
 See :help vimball for details. If you have difficulties or use vim 7.0, 
 please make sure, you have the current version of vimball (vimscript 
