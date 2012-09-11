@@ -108,7 +108,9 @@ function! tlog#Display_file(text)
         let fname = expand('%:r') .'.log'
     endif
     exec 'redir >> '. fname
-    silent echom a:text
+    for s in split(a:text, "\n")
+      silent echomsg s
+    endfor
     redir END
 endf
 
