@@ -14,7 +14,7 @@ function! tlog#Comment(line1, line2) "{{{3
     " TLogVAR a:line1, a:line2
     let tlogCP = getpos('.')
     let tlogSR = @/
-    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1" \2/ge'
+    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(silent!\=\)\= call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1" \2/ge'
     let @/ = tlogSR
     call setpos('.', tlogCP)
 endf
@@ -23,7 +23,7 @@ endf
 function! tlog#Uncomment(line1, line2) "{{{3
     let tlogCP = getpos('.')
     let tlogSR = @/
-    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)"\s*\(echom ["'']DBG\>\|.\{-}\s"\s\+DBG$\|\(call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1\2/ge'
+    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)"\s*\(echom ["'']DBG\>\|.\{-}\s"\s\+DBG$\|\(\(silent!\=\)\= call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1\2/ge'
     let @/ = tlogSR
     call setpos('.', tlogCP)
 endf
