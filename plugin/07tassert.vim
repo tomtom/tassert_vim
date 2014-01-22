@@ -3,8 +3,8 @@
 " @Website:     http://www.vim.org/account/profile.php?user_id=4037
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2006-12-12.
-" @Last Change: 2010-02-11.
-" @Revision:    812
+" @Last Change: 2014-01-20.
+" @Revision:    816
 "
 " GetLatestVimScripts: 1730 1 07tAssert.vim
 
@@ -71,7 +71,7 @@ else
 endif
 
 
-if !exists(':TAssertOn')
+if !exists('s:self_file')
 
     if exists('*fnameescape')
         let s:self_file = fnameescape(expand('<sfile>:p'))
@@ -97,7 +97,7 @@ if !exists(':TAssertOn')
     " and a TAssertEnd command.
     command! -range=% -bar -bang TAssertUncomment call tassert#Uncomment(<line1>, <line2>, "<bang>")
 
-end
+endif
 
 
 let &cpo = s:save_cpo
