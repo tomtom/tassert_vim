@@ -4,7 +4,7 @@
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2006-12-15.
 " @Last Change: 2009-08-16.
-" @Revision:    0.3.160
+" @Revision:    0.3.164
 
 if &cp || exists('loaded_tlog')
     finish
@@ -21,11 +21,11 @@ if !exists('g:tlogBacktrace') | let g:tlogBacktrace = 2       | endif
 
 
 " :display: :TLog MESSAGE
-command! -nargs=+ TLog call tlog#Log(<args>)
+command! -bar -nargs=+ TLog call tlog#Log(<args>)
 
 " :display: :TLogTODO MESSAGE
 " Mark as "Not yet implemented".
-command! -nargs=* -bar TLogTODO call tlog#Debug(expand('<sfile>').': Not yet implemented '. <q-args>)
+command! -bar -nargs=* -bar TLogTODO call tlog#Debug(expand('<sfile>').': Not yet implemented '. <q-args>)
 
 " :display: :TLogDBG EXPRESSION
 " Expression must evaluate to a string.
@@ -33,16 +33,16 @@ command! -nargs=1 TLogDBG call tlog#Debug(expand('<sfile>').': '. <args>)
 
 " :display: :TLogExec EXPRESSION
 " Execute an expression.
-command! -nargs=1 TLogExec exec <q-args>
+command! -bar -nargs=1 TLogExec exec <q-args>
 
 " :display: :TLogStyle STYLE EXPRESSION
 " Expression must evaluate to a string.
-command! -nargs=+ TLogStyle call tlog#Style(<args>)
+command! -bar -nargs=+ TLogStyle call tlog#Style(<args>)
 
 " :display: :TLogVAR VAR1, VAR2 ...
 " Display variable names and their values.
 " This command doesn't work with script-local variables.
-command! -nargs=+ TLogVAR call tlog#Var(expand('<sfile>'), <q-args>, <args>)
+command! -bar -nargs=+ TLogVAR call tlog#Var(expand('<sfile>'), <q-args>, <args>)
 " command! -nargs=+ TLogVAR if !TLogVAR(expand('<sfile>').': ', <q-args>, <f-args>) | call tlog#Debug(expand('<sfile>').': Var doesn''t exist: '. <q-args>) | endif
 
 " Enable logging.
