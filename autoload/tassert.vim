@@ -1,14 +1,33 @@
-" tassert.vim
 " @Author:      Thomas Link (mailto:micathom AT gmail com?subject=[vim])
 " @Website:     http://www.vim.org/account/profile.php?user_id=4037
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2009-02-21.
 " @Last Change: 2010-01-03.
-" @Revision:    0.0.100
+" @Revision:    107
 
 let s:save_cpo = &cpo
 set cpo&vim
 " call tlog#Log('Load: '. expand('<sfile>')) " vimtlib-sfile
+
+
+function! tassert#G(line1, line2, cmd, rx) "{{{3
+    let pos = getpos('.')
+    try
+        let cmd = a:line1 .','. a:line2 .'g/'. escape(a:rx, '/') .'/ '. a:cmd
+        exec cmd
+    finally
+        call setpos('.', pos)
+    endtry
+endf
+
+
+function! tassert#Exec(line1, line2, bang, cmd) "{{{3
+    let rx = '\C^\s*\("\s*\)\?TAssert'
+    call tassert#G(a:line1, a:line2, a:cmd, rx)
+    if a:bang
+        call tlog#Exec(line1, line2, cmd)
+    endif
+endf
 
 
 " :nodoc:

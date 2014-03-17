@@ -4,16 +4,16 @@
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2006-12-12.
 " @Last Change: 2014-01-27.
-" @Revision:    820
+" @Revision:    823
 "
 " GetLatestVimScripts: 1730 1 07tAssert.vim
 
-if &cp || exists("loaded_tassert")
+if &cp || exists("g:loaded_tassert")
     if !(!exists("s:assert") || g:TASSERT != s:assert)
         finish
     endif
 endif
-let loaded_tassert = 101
+let g:loaded_tassert = 101
 
 let s:save_cpo = &cpo
 set cpo&vim
@@ -94,6 +94,11 @@ if !exists('s:self_file')
     " Uncomment TAssert* commands and all lines between a TAssertBegin 
     " and a TAssertEnd command.
     command! -range=% -bar -bang TAssertUncomment call tassert#Uncomment(<line1>, <line2>, "<bang>")
+
+    " :display: :TAssertG[!] CMD
+    " Run CMD on all TAssert-related lines.
+    " With bang, run CMD also on all log-related lines.
+    command! -nargs=1 -range=% -bar -bang TAssertG call tassert#Exec(<line1>, <line2>, !empty("<bang>"), <q-args>)
 
 endif
 

@@ -4,12 +4,12 @@
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2006-12-15.
 " @Last Change: 2009-08-16.
-" @Revision:    0.3.164
+" @Revision:    0.3.167
 
-if &cp || exists('loaded_tlog')
+if &cp || exists('g:loaded_tlog')
     finish
 endif
-let loaded_tlog = 100
+let g:loaded_tlog = 100
 
 
 " One of: echo, echom, file, Decho
@@ -64,6 +64,9 @@ command! -range=% -bar TLogComment call tlog#Comment(<line1>, <line2>)
 " Re-enable all tlog-related statements.
 command! -range=% -bar TLogUncomment call tlog#Uncomment(<line1>, <line2>)
 
+" :display: :TLogG CMD
+" Run CMD on all log-related lines.
+command! -nargs=1 -range=% -bar TLogG call tlog#Exec(<line1>, <line2>, <q-args>)
 
 finish
 

@@ -1,13 +1,18 @@
-" tlog.vim
 " @Author:      Thomas Link (mailto:micathom AT gmail com?subject=[vim])
 " @Website:     http://www.vim.org/account/profile.php?user_id=4037
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2009-02-21.
 " @Last Change: 2011-06-16.
-" @Revision:    0.0.36
+" @Revision:    39
 
 let s:save_cpo = &cpo
 set cpo&vim
+
+
+function! tlog#Exec(line1, line2, cmd) "{{{3
+    let rx = '\C^\s*\("\s*\)\?\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)'
+    call tassert#G(a:line1, a:line2, a:cmd, rx)
+endf
 
 
 function! tlog#Comment(line1, line2) "{{{3
