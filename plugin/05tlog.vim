@@ -4,7 +4,7 @@
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2006-12-15.
 " @Last Change: 2009-08-16.
-" @Revision:    0.3.167
+" @Revision:    0.3.168
 
 if &cp || exists('g:loaded_tlog')
     finish
@@ -42,7 +42,7 @@ command! -bar -nargs=+ TLogStyle call tlog#Style(<args>)
 " :display: :TLogVAR VAR1, VAR2 ...
 " Display variable names and their values.
 " This command doesn't work with script-local variables.
-command! -bar -nargs=+ TLogVAR call tlog#Var(expand('<sfile>'), <q-args>, <args>)
+command! -nargs=+ TLogVAR call tlog#Var(expand('<sfile>'), <q-args>, <args>)
 " command! -nargs=+ TLogVAR if !TLogVAR(expand('<sfile>').': ', <q-args>, <f-args>) | call tlog#Debug(expand('<sfile>').': Var doesn''t exist: '. <q-args>) | endif
 
 " Enable logging.
