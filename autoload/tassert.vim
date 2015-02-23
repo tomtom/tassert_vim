@@ -3,7 +3,7 @@
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2009-02-21.
 " @Last Change: 2010-01-03.
-" @Revision:    107
+" @Revision:    109
 
 let s:save_cpo = &cpo
 set cpo&vim
@@ -32,6 +32,7 @@ endf
 
 " :nodoc:
 function! tassert#Comment(line1, line2, bang) "{{{3
+    " TLogVAR a:line1, a:line2
     let assertCP = getpos('.')
     let tassertSR = @/
     call s:CommentRegion(1, a:line1, a:line2)
