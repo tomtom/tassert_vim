@@ -104,7 +104,7 @@ function! tlog#Display_echo(text)
 endf
 
 function! tlog#Display_echom(text)
-    echom a:text
+    unsilent echom a:text
 endf
 
 function! tlog#Display_file(text)
