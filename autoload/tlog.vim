@@ -3,14 +3,14 @@
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2009-02-21.
 " @Last Change: 2011-06-16.
-" @Revision:    39
+" @Revision:    41
 
 let s:save_cpo = &cpo
 set cpo&vim
 
 
 function! tlog#Exec(line1, line2, cmd) "{{{3
-    let rx = '\C^\s*\("\s*\)\?\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)'
+    let rx = '\C^\s*\("\s*\)\?\%(uns\%[ilent]\s\+\)\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)'
     call tassert#G(a:line1, a:line2, a:cmd, rx)
 endf
 
@@ -19,7 +19,7 @@ function! tlog#Comment(line1, line2) "{{{3
     " TLogVAR a:line1, a:line2
     let tlogCP = getpos('.')
     let tlogSR = @/
-    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1" \2/ge'
+    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)\%(uns\%[ilent]\s\+\)\?\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1" \2/ge'
     let @/ = tlogSR
     call setpos('.', tlogCP)
 endf
@@ -28,7 +28,7 @@ endf
 function! tlog#Uncomment(line1, line2) "{{{3
     let tlogCP = getpos('.')
     let tlogSR = @/
-    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)"\s*\(echom ["'']DBG\>\|.\{-}\s"\s\+DBG$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1\2/ge'
+    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)"\s*\%(uns\%[ilent]\s\+\)\(echom ["'']DBG\>\|.\{-}\s"\s\+DBG$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1\2/ge'
     let @/ = tlogSR
     call setpos('.', tlogCP)
 endf
