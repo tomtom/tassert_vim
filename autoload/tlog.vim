@@ -2,8 +2,8 @@
 " @Website:     http://www.vim.org/account/profile.php?user_id=4037
 " @License:     GPL (see http://www.gnu.org/licenses/gpl.txt)
 " @Created:     2009-02-21.
-" @Last Change: 2011-06-16.
-" @Revision:    41
+" @Last Change: 2015-10-27.
+" @Revision:    45
 
 let s:save_cpo = &cpo
 set cpo&vim
@@ -19,7 +19,7 @@ function! tlog#Comment(line1, line2) "{{{3
     " TLogVAR a:line1, a:line2
     let tlogCP = getpos('.')
     let tlogSR = @/
-    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)\%(uns\%[ilent]\s\+\)\?\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1" \2/ge'
+    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)\%(uns\%[ilent]\s\+\)\?\(echom ["'']DBG\>\|[^"[:space:]].\{-}\s"\s\+DBG\s*$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\|TLibTrace\)\)/\1" \2/ge'
     let @/ = tlogSR
     call setpos('.', tlogCP)
 endf
@@ -28,7 +28,7 @@ endf
 function! tlog#Uncomment(line1, line2) "{{{3
     let tlogCP = getpos('.')
     let tlogSR = @/
-    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)"\s*\%(uns\%[ilent]\s\+\)\(echom ["'']DBG\>\|.\{-}\s"\s\+DBG$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\)\)/\1\2/ge'
+    exec 'silent '. a:line1 .','. a:line2 .'s/\C^\(\s*\)"\s*\%(uns\%[ilent]\s\+\)\(echom ["'']DBG\>\|.\{-}\s"\s\+DBG$\|\(\(sil\%[ent]!\?\s\+\)\?call *\|exe\%[cute] *[''"]\)\?\(TLog\|tlog#\|TLibTrace\)\)/\1\2/ge'
     let @/ = tlogSR
     call setpos('.', tlogCP)
 endf
@@ -94,6 +94,16 @@ function! tlog#Var(caller, var, ...)
     return tlog#Log(join(msg, ' '))
     " return tlog#Log('VAR: '. a:text .' '. a:var .'='. string(a:val))
 endf
+
+
+function! tlog#Trace(caller, var, ...) abort "{{{3
+    if a:1
+        let vars = substitute(a:var, '^\S\+\s\+')
+        let args = a:000[1 : -1]
+        call call(function('tlog#Var', [a:caller, vars] + args))
+    endif
+endf
+
 
 function! tlog#Display_dialog(text) "{{{3
     call inputdialog(a:text)
